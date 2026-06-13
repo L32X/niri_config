@@ -143,6 +143,7 @@ overview {
 // See the binds section below for more spawn examples.
 // This line starts waybar, a commonly used bar for Wayland compositors.
 spawn-at-startup "qs" "-c" "noctalia-shell"
+// 运行环境
 environment {
   XDG_CURRENT_DESKTOP "niri"
   QT_QPA_PLATFORM "wayland"
@@ -222,6 +223,7 @@ window-rule {
     match app-id=r#"^xdg-desktop-portal$"#
     open-floating true
 }
+// shell 打开的窗口规则
 window-rule {
     match app-id=r#"^org\.wezfurlong\.wezterm$"#
     match app-id="Alacritty"
@@ -229,6 +231,10 @@ window-rule {
     match app-id="com.mitchellh.ghostty"
     match app-id="kitty"
     draw-border-with-background false
+    open-maximized true // 打开时为最大化
+    background-effect {
+      blur true // 启用背景模糊效果
+    }
 }
 // 非活动窗口模糊
 //window-rule {
@@ -279,7 +285,8 @@ binds {
         spawn "dms" "ipc" "call" "dankdash" "wallpaper";
     }
     Mod+N hotkey-overlay-title="Notification Center" { spawn "dms" "ipc" "call" "notifications" "toggle"; }
-    Mod+Shift+N hotkey-overlay-title="vscode" { spawn "/usr/bin/code"; }
+    // win+shift+N 打开vscode
+    Mod+Shift+N hotkey-overlay-title="open-vscode" { spawn "/usr/bin/code"; }
 
     // === Security ===
     Mod+Alt+L hotkey-overlay-title="Lock Screen" {
@@ -315,7 +322,9 @@ binds {
     // === Window Management ===
     Mod+Q repeat=false { close-window; }
     Mod+F { maximize-column; }
+    // 全屏
     Mod+Shift+F { fullscreen-window; }
+    // 让窗口浮动
     Mod+Shift+T { toggle-window-floating; }
     Mod+Shift+V { switch-focus-between-floating-and-tiling; }
     Mod+W { toggle-column-tabbed-display; }
@@ -455,4 +464,6 @@ binds {
 debug {
     honor-xdg-activation-with-invalid-serial
 }
+
+// 添加noctalia的配置
 include "./noctalia.kdl"

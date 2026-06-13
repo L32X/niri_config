@@ -1,7 +1,10 @@
 layout {
 
+    // 活跃窗口背景颜色
     focus-ring {
-        active-color   "#cba6f7"
+        // 活跃颜色
+        active-color   "#EEDD82"
+        // 不活跃的颜色
         inactive-color "#1e1e2e"
         urgent-color   "#f38ba8"
     }
